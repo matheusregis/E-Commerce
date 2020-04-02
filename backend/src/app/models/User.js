@@ -1,5 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
+import Address from './Address';
+
 
 class User extends Model {
   static init(sequelize) {
@@ -17,14 +19,15 @@ class User extends Model {
       }
     );
     this.addHook('beforeSave', async (user) => {
-      console.log(user.password_hash);
       if (user.password) {
         user.password_hash = await bcrypt.hash(user.password, 8);
       }
-      console.log(user.password_hash);
     });
 
     return this;
+  }
+  static associate() {
+    this.hasMany(Address, { foreignKey: 'user_id', as: 'addresses' });
   }
 }
 
