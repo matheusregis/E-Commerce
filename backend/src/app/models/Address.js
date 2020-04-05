@@ -16,6 +16,7 @@ class Address extends Model {
       }
     );
   }
+
   static associate() {
     this.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
   }

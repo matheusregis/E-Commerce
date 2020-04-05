@@ -18,7 +18,6 @@ class Database {
     models.map((model) => model.init(this.connection));
     models.map((model) => model.associate(this.connection));
   }
-
 }
 
 export default new Database();

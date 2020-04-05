@@ -1,7 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
+// eslint-disable-next-line import/no-cycle
 import Address from './Address';
-
 
 class User extends Model {
   static init(sequelize) {
@@ -26,6 +26,7 @@ class User extends Model {
 
     return this;
   }
+
   static associate() {
     this.hasMany(Address, { foreignKey: 'user_id', as: 'addresses' });
   }

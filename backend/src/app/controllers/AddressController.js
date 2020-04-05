@@ -6,7 +6,7 @@ class AddressController {
     const { user_id } = req.params;
 
     const user = await User.findByPk(user_id, {
-      include: { association: 'addresses' }
+      include: { association: 'addresses' },
     });
 
     return res.json(user);
@@ -29,11 +29,10 @@ class AddressController {
       address_details,
       zipcode,
       user_id,
-    })
+    });
 
     return res.json(address);
   }
 }
-
 
 export default new AddressController();
