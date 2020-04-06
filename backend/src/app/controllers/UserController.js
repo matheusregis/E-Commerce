@@ -12,9 +12,20 @@ class UserController {
 
   async store(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
-      email: Yup.string().email().required(),
-      password: Yup.string().required.min(6),
+      name: Yup.string()
+      .required('Informe o Nome'),
+      email: Yup.string()
+      .required('Informe o E-mail')
+      .email('Informe um E-mail Válido'),
+      password: Yup.string()
+      .required('Digite sua senha')
+      .min(6, 'A senha deve conter no mínimo 6 dígitos'),
+      cpf: Yup.string()
+      .required('Digite seu CPF')
+      .number('Digite somente números para o CPF')
+      .min(11)
+      .max(11),
+      birthday: Yup.date('Digite uma data válida')
     });
 
     if (!(await schema.isValid(req.body))) {
